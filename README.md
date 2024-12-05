@@ -19,3 +19,15 @@ This project demonstrates how to build a real-time asset tracking application us
 ```bash
 git clone https://github.com/aws-solutions-library-samples/guidance-for-tracking-assets-and-locating-devices-using-aws-iot.git --recurse-submodules
 cd guidance-for-tracking-assets-and-locating-devices-using-aws-iot
+
+### 2. Install Dependencies and Deploy CloudFormation
+cd amazon-location-samples-react/tracking-data-streaming
+npm install
+chmod +x deploy_cloudformation.sh
+export AWS_REGION=<your-region>  # Replace with your AWS region
+./deploy_cloudformation.sh
+
+### 3. Configure IoT Resources
+cd ../../cf
+aws cloudformation create-stack --stack-name TrackingAndGeofencingIoTResources --template-body file://iotResources.yml --capabilities CAPABILITY_IAM
+aws cloudformation describe-stacks --stack-name TrackingAndGeofencingIoTResources
